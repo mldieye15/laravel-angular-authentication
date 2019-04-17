@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\;
 
 class AuthController extends Controller
 {
@@ -32,6 +34,18 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /** Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *  */
+    public function signup(Request $request)
+    {
+        $user = User::create($request->all());
+        return $this->login($request);
+        // creation de l'utilisateur
+        //$user = User::create($request->all());
+        //return $this->login($request);  // we can pass $user but $request return email and password
+    }
     /**
      * Get the authenticated User.
      *
